@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color:DodgerBlue;">
+
+<head><center><b>Date Calculator!</b></center></head>
+<body>
+
+Put in a set of days, months, and years and see the conversions! <br>	
+Days: <input id='day' type="number" name="day" oninput="calc('day')"  placeholder="0"/> <br>
+Months: <input id='month' type="number" name="month" oninput="calc('month')"  placeholder="0"/> <br>
+Years: <input id='year' type="number" name="year" oninput="calc('year')"  placeholder="0"/> <br>
+<br>
+
+Results: <br>
+Days: <span id="totalDay"></span> <br>
+Months: <span id="totalMonth"></span> <br>
+Year: <span id="totalYear"></span> <br>
+<br>
+Note that a year is 360 days in this calculator because a month is defined by 30 days and not accounting leap years or specific months with more or less days.
+
+<script>
+
+function calc(usedID){
+	if (document.getElementById("day").value.length == 0) {
+		var day = 0;
+	}
+	else {
+		var day = parseInt(document.getElementById("day").value);
+	}
+    
+    if (document.getElementById("month").value.length == 0) {
+		var month = 0;
+	}
+	else {
+		var month = parseInt(document.getElementById("month").value);
+	}
+	if (document.getElementById("year").value.length == 0) {
+		var year = 0;
+	}
+	else {
+		var year = parseInt(document.getElementById("year").value);
+	}
+	
+	document.getElementById('totalDay').innerHTML = day + month*30 + year*360;
+	document.getElementById('totalMonth').innerHTML = day/30 + month + year*12;
+	document.getElementById('totalYear').innerHTML = day/360 + month/12 + year;
+}
+	
+
+</script>
+
+<body/>
+</html>

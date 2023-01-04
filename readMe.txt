@@ -1,0 +1,3 @@
+Everything within the file webApplications, besides this read me, was apart of a web server as a part of a class and everything in the file named www was a public web address that had live pages. The assiginments and web pages ranged from small html pages with pictures and texts to the final that was a whack a mole game with google account verification and a live leaderboard. The web server and the SQL tables with it are no longer active, but the files would take minimal effort to deploy them live again.
+
+Year code was made: 2021

@@ -1,0 +1,89 @@
+html {
+  box-sizing: border-box;
+  font-size: 10px;
+
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+.start{
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  font-size: 5rem;
+  margin-bottom: 0;
+}
+
+
+.center{
+margin-left:30%;
+
+}
+
+.score {
+  color: rgb(0, 255, 50);
+  margin-top: 10%;
+
+ }
+
+.wholegame{
+display:flex;
+}
+.division1{
+  float:left;
+}
+.division2{
+  float:right;
+}
+.game {
+  width: 800px;
+  height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+
+}
+
+.hole {
+  flex: 1 0 33.33%;
+  overflow: hidden;
+  position: relative;
+}
+
+.hole:after {
+  display: block;
+  background: url(moleHole.svg) bottom center no-repeat;
+  background-size: contain;
+  content: '';
+  width: 100%;
+  height:60px;
+  position: absolute;
+  z-index: 2;
+  bottom: -30px;
+}
+
+.mole {
+  background: url('moleF.svg') bottom center no-repeat;
+  background-size: 50%;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  height: 100%;
+  transition:all 0.4s ease;
+}
+
+.hole.up .mole {
+  top: 0;
+}
+
+button{
+  background: rgba(0, 255, 50, 0.2);
+  border: green;
+  font-size: 3rem;
+  cursor: pointer;
+}

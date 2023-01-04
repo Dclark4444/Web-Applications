@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color:DodgerBlue;">
+
+<head><center><b class="title">Tic Tac Toe!</b></center></head>
+<body>
+	
+<style>
+.title {
+	font-family: helvetica;
+	font-size: 32px;
+}
+.paragraph {
+	font-family: helvetica;
+	font-size: 14px;
+}
+</style>
+
+	
+<select id="gameType" onchange="restartGame()" class="paragraph">
+<option value="playAI">Play the AI</option>
+<option value="multiLocal">Play Local Multiplayer</option>
+</select><br>
+
+<button onclick="restartGame()" class="paragraph">Restart?</button><br>
+<span id="turnText" class="paragraph">It is player 1's turn</span><br>
+<span id="winnerText" class="paragraph"></span><br><br>
+
+<center><input type="image" id="0,0" onClick="play('0,0')" readonly src="images/gameBlank.png">
+<img src="images/vertical.png" alt="line" width="10" height="200">
+<input type="image" id="1,0" onClick="play('1,0')" readonly src="images/gameBlank.png">
+<img src="images/vertical.png" alt="line" width="10" height="200">
+<input type="image" id="2,0" onClick="play('2,0')" readonly src="images/gameBlank.png">
+<br>
+<img src="images/horizontal.png" alt="line" width="203" height="10"><img src="images/horizontal.png" alt="line" width="203" height="10"><img src="images/horizontal.png" alt="line" width="203" height="10"><br>
+<input type="image" id="0,1" onClick="play('0,1')" readonly src="images/gameBlank.png">
+<img src="images/vertical.png" alt="line" width="10" height="200">
+<input type="image" id="1,1" onClick="play('1,1')" readonly src="images/gameBlank.png">
+<img src="images/vertical.png" alt="line" width="10" height="200">
+<input type="image" id="2,1" onClick="play('2,1')" readonly src="images/gameBlank.png">
+<br>
+<img src="images/horizontal.png" alt="line" width="203" height="10"><img src="images/horizontal.png" alt="line" width="203" height="10"><img src="images/horizontal.png" alt="line" width="203" height="10"><br>
+<input type="image" id="0,2" onClick="play('0,2')" readonly src="images/gameBlank.png">
+<img src="images/vertical.png" alt="line" width="10" height="200">
+<input type="image" id="1,2" onClick="play('1,2')" readonly src="images/gameBlank.png">
+<img src="images/vertical.png" alt="line" width="10" height="200">
+<input type="image" id="2,2" onClick="play('2,2')" readonly src="images/gameBlank.png">
+<br></center>
+
+<script>
+var gameOver = false;
+var gameType = document.getElementById("gameType").value;
+var turn = 1;
+var grid =
+[["blank", "blank", "blank"],
+ ["blank", "blank", "blank"],
+ ["blank", "blank", "blank"]];
+
+function restartGame() {
+	var coord = "";
+	
+	grid =
+		[["blank", "blank", "blank"],
+		["blank", "blank", "blank"],
+		["blank", "blank", "blank"]];
+	
+	for(let i=0;i<3;i++) {
+		for(let j=0;j<3;j++) {
+			coord = i.toString()+","+j.toString();
+			document.getElementById(coord).src = "images/gameBlank.png";
+		}
+	}
+	gameOver = false;
+	gameType = document.getElementById("gameType").value;
+	turn = 1;
+	document.getElementById("turnText").innerHTML = "It is player 1's turn";
+	document.getElementById("winnerText").innerHTML = "";
+}
+
+function checkForWin() {	
+	if (  (grid[0][0] == "X" && grid[1][0] == "X" && grid[2][0] == "X") ||
+		  (grid[0][1] == "X" && grid[1][1] == "X" && grid[2][1] == "X") ||
+		  (grid[0][2] == "X" && grid[1][2] == "X" && grid[2][2] == "X") ||
+		  
+		  (grid[0][0] == "X" && grid[0][1] == "X" && grid[0][2] == "X") ||
+		  (grid[1][0] == "X" && grid[1][1] == "X" && grid[1][2] == "X") ||
+		  (grid[2][0] == "X" && grid[2][1] == "X" && grid[2][2] == "X") ||
+		  
+		  (grid[0][0] == "X" && grid[1][1] == "X" && grid[2][2] == "X") ||
+		  (grid[2][0] == "X" && grid[1][1] == "X" && grid[0][2] == "X") ||
+		  
+		  (grid[0][0] == "O" && grid[1][0] == "O" && grid[2][0] == "O") ||
+		  (grid[0][1] == "O" && grid[1][1] == "O" && grid[2][1] == "O") ||
+		  (grid[0][2] == "O" && grid[1][2] == "O" && grid[2][2] == "O") ||
+		  
+		  (grid[0][0] == "O" && grid[0][1] == "O" && grid[0][2] == "O") ||
+		  (grid[1][0] == "O" && grid[1][1] == "O" && grid[1][2] == "O") ||
+		  (grid[2][0] == "O" && grid[2][1] == "O" && grid[2][2] == "O") ||
+		  
+		  (grid[0][0] == "O" && grid[1][1] == "O" && grid[2][2] == "O") ||
+		  (grid[2][0] == "O" && grid[1][1] == "O" && grid[0][2] == "O") ) {
+			  
+		gameOver = true;
+		if (turn == 2) {
+			var usedStr = "Player 1 Won!";
+		}
+		else {
+			var usedStr = "Player 2 Won!";
+		}
+
+		document.getElementById("winnerText").innerHTML = usedStr;
+	}
+	else {
+		if((grid[0][0] != "blank") && (grid[1][0] != "blank") && (grid[2][0] != "blank") &&
+			(grid[0][1] != "blank") && (grid[1][1] != "blank") && (grid[2][1] != "blank") &&
+			(grid[0][2] != "blank") && (grid[1][2] != "blank") && (grid[2][2] != "blank")) {
+		gameOver = true;
+		document.getElementById("winnerText").innerHTML = "It's a cat!";		
+		}
+	}
+}
+
+function runAI() {
+	var returnData = "";
+	if (grid[1][1] == "blank") {
+		returnData = "1,1";
+	}
+	else if (grid[0][0] == "blank") {
+		returnData = "0,0";
+	}
+	else if (grid[2][0] == "blank") {
+		returnData = "2,0";
+	}
+	else if (grid[0][2] == "blank") {
+		returnData = "0,2";
+	}
+	else if (grid[2][2] == "blank") {
+		returnData = "2,2";
+	}
+	else if (grid[0][1] == "blank") {
+		returnData = "0,1";
+	}
+	else if (grid[1][0] == "blank") {
+		returnData = "1,0";
+	}
+	else if (grid[1][2] == "blank") {
+		returnData = "1,2";
+	}
+	else {
+		returnData = "2,1";
+	}
+	
+	const tempID = [];
+	var temporary = returnData.split(",");
+	for(let i=0;i<2;i++) {
+		tempID.push(parseInt(temporary[i]));
+	}
+	grid[tempID[0]][tempID[1]]="O";
+	document.getElementById(returnData).src = "images/gameO.png";
+	turn = 1;
+}
+
+function play(strID) {
+	if (gameOver == false) {
+		
+		const intID = [];
+		var temp = strID.split(",");
+		for(let i=0;i<2;i++) {
+			intID.push(parseInt(temp[i]));
+		}
+		
+		if (grid[intID[0]][intID[1]] == "blank") {
+	
+			if (turn == 1) {
+				var usedStr = "X";
+				turn = 2;
+				document.getElementById("turnText").innerHTML = "It is player 2's turn";
+			}
+			else {
+				var usedStr = "O";
+				turn = 1;
+				document.getElementById("turnText").innerHTML = "It is player 1's turn";
+			}
+			
+			grid[intID[0]][intID[1]] = usedStr;
+			
+			document.getElementById(strID).src = "images/game" + usedStr + ".png";
+			
+			checkForWin();
+			if (gameOver == false) {
+				if (gameType == "playAI") {
+					runAI();
+					checkForWin();
+				}
+			}
+		}
+	}
+}
+
+</script>
+
+<body/>
+</html>
